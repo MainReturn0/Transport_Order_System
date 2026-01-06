@@ -1,0 +1,178 @@
+/* --- 1. Global Variables & Reset --- */
+:root {
+    /* Color Palette matching the Transport types */
+    --primary-text: #2c3e50;
+    --bg-color: #f4f7f6;
+    
+    /* Transport Colors */
+    --air-color: #3498db;  /* Sky Blue for Air */
+    --ship-color: #f1c40f; /* Yellow/Gold for Ship (Maritime) */
+    --truck-color: #27ae60; /* Green for Land/Truck */
+    
+    /* Utility Colors */
+    --urgent-color: #e74c3c; /* Red for Priority */
+    --white: #ffffff;
+    --gray-light: #ecf0f1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--primary-text);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* --- 2. Header Styling --- */
+.main-header {
+    background-color: var(--primary-text);
+    color: var(--white);
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.main-header h1 { margin: 0; font-size: 2rem; }
+.main-header p { margin: 10px 0 0; opacity: 0.8; font-style: italic; }
+
+/* --- 3. Container Layout --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+hr { border: 0; height: 1px; background: #ddd; margin: 40px 0; }
+
+/* --- 4. Logic Cards (Flexbox) --- */
+.logic-dashboard h2, .order-input-section h2, .records-section h2 {
+    border-left: 5px solid var(--primary-text);
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+.logic-cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.card {
+    background: var(--white);
+    flex: 1 1 300px; /* Responsive flex */
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover { transform: translateY(-5px); }
+
+.card h3 { margin-top: 10px; display: inline-block; }
+.card .icon { font-size: 2rem; float: right; }
+.card ul { padding-left: 20px; margin-bottom: 0; font-size: 0.9rem; }
+
+/* Specific Card Themes */
+.card-air { border-top: 6px solid var(--air-color); }
+.card-ship { border-top: 6px solid var(--ship-color); }
+.card-truck { border-top: 6px solid var(--truck-color); }
+
+/* --- 5. Form Styling --- */
+.order-form {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end; /* Aligns inputs with button */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 200px;
+}
+
+label { font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+
+input, select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.btn-process {
+    background-color: var(--primary-text);
+    color: var(--white);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.3s;
+    flex: 0 0 auto;
+}
+
+.btn-process:hover { background-color: #1a252f; }
+
+/* --- 6. Table Styling --- */
+.records-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden;   /* Ensures headers respect border radius */
+}
+
+.records-table th {
+    background-color: var(--primary-text);
+    color: var(--white);
+    text-align: left;
+    padding: 15px;
+}
+
+.records-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Status Badges */
+.tag {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.tag.urgent {
+    background-color: var(--urgent-color);
+    color: var(--white);
+}
+
+/* Transport Text Coloring in Table */
+.transport-air { color: var(--air-color); font-weight: bold; }
+.transport-ship { color: #d4ac0d; font-weight: bold; } /* Darker yellow for text readability */
+.transport-truck { color: var(--truck-color); font-weight: bold; }
+
+/* Footer */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    color: #95a5a6;
+    font-size: 0.9rem;
+    margin-top: 40px;
+}
