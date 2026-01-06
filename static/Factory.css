@@ -181,7 +181,7 @@ select {
     color: var(--text-primary);
     transition: border-color 0.2s;
     box-sizing: border-box;
-    /* Fix padding issues */
+    /* Include padding and border in the element width to prevent overflow/misaligned form fields */
 }
 
 input:focus,

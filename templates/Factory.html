@@ -110,13 +110,13 @@
     </footer>
 
     <script>
-        // Keep your existing JavaScript Logic exactly the same!
+
         function sendOrder() {
             const weight = document.getElementById('weight').value;
             const distance = document.getElementById('distance').value;
             const urgent = document.getElementById('urgent').value;
 
-            if (!weight || !distance) { alert("Please fill in fields!"); return; }
+            if (!weight || !distance) { alert("Please fill in weight and distance fields!"); return; }
 
             fetch('/process_order', {
                 method: 'POST',

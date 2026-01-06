@@ -3,11 +3,22 @@ import os
 import re
 import random
 from flask import Flask, render_template, request, jsonify
+import sys
 
 app = Flask(__name__)
 
 # --- Load C++ Library ---
-lib_path = os.path.abspath("logistics.so")
+_lib_base_name = "logistics"
+if os.name == "nt":
+    _lib_filename = f"{_lib_base_name}.dll"
+elif sys.platform == "darwin":
+    _lib_filename = f"{_lib_base_name}.dylib"
+else:
+    # Preserve existing behavior on Unix-like systems
+    _lib_filename = f"{_lib_base_name}.so"
+
+_here = os.path.dirname(os.path.abspath(__file__))
+lib_path = os.path.join(_here, _lib_filename)
 lib = ctypes.CDLL(lib_path)
 
 lib.add_order.argtypes = [ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_bool]

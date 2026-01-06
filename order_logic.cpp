@@ -1,4 +1,4 @@
-// Instead of using java script, we will implement the order management system in C++. Therefore we wont use the main function cause we will use python to call the c++ code. so we will warp the logic in exter C function so that python can call it. To make this scalable, we move the decision logic (Truck vs. Ship vs. Air) out of the OrderManager and into a dedicated TransportFactory.
+// Instead of using JavaScript, we will implement the order management system in C++. Therefore we won't use the main function, because we will use Python to call the C++ code, and we will wrap the logic in an extern "C" function so that Python can call it. To make this scalable, we move the decision logic (Truck vs. Ship vs. Air) out of the OrderManager and into a dedicated TransportFactory.
 
 #include <iostream>
 #include <memory>
