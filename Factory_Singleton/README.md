@@ -61,7 +61,7 @@ To allow Python to "see" the C++ functions, we wrapped the entry points in an `e
 extern "C" {
     void add_order(int id, double weight, double distance, bool urgent) {
         // Bridges C-style inputs to C++ Objects
-        manager.process(OrderDetails{id, weight, distance, urgent});
+        manager_instance.process(OrderDetails{id, weight, distance, urgent});
     }
 }
 ```
