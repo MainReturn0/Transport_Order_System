@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics Command Center</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Factory.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <h1>📦 LogisticsOS</h1>
+            <span class="status-badge">System Online ●</span>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <header class="hero-section">
+            <h2>Select Transport Mode</h2>
+            <p>AI-Powered Logistics Routing Engine</p>
+        </header>
+
+        <section class="cards-grid">
+            <div class="card transport-card"
+                style="background-image: url('/air.jpg');">
+                <div class="card-overlay">
+                    <div class="card-content">
+                        <h3>Air Freight</h3>
+                        <p>For urgent, lightweight cargo (&lt; 20kg).</p>
+                                <span class="badge">Express ⚡️</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card transport-card"
+                style="background-image: url('/ship.jpg');">
+                <div class="card-overlay">
+                    <div class="card-content">
+                        <h3>Ocean Freight</h3>
+                        <p>For heavy loads (> 1000kg) or long haul.</p>
+                        <span class="badge">Economy ⚓️</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card transport-card"
+                style="background-image: url('/truck.jpg');">
+                <div class="card-overlay">
+                    <div class="card-content">
+                        <h3>Ground Transport</h3>
+                        <p>Standard domestic delivery network.</p>
+                        <span class="badge">Standard 🚛</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel input-panel">
+            <div class="panel-header">
+                <h3>New Order</h3>
+            </div>
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Weight (kg)</label>
+                    <input type="number" id="weight" placeholder="0.0">
+                </div>
+                <div class="input-group">
+                    <label>Distance (km)</label>
+                    <input type="number" id="distance" placeholder="0.0">
+                </div>
+                <div class="input-group">
+                    <label>Priority</label>
+                    <select id="urgent">
+                        <option value="false">Standard</option>
+                        <option value="true">Urgent / Express</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn-process" onclick="sendOrder()">
+                Process Order
+            </button>
+        </section>
+
+        <section class="panel records-panel">
+            <div class="panel-header">
+                <h3>Recent Activity</h3>
+            </div>
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Details</th>
+                        <th>Transport Mode</th>
+                        <th>ETA</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Built with C++ & Python • <a href="#">View Source</a></p>
+    </footer>
+
+    <script>
+        // Keep your existing JavaScript Logic exactly the same!
+        function sendOrder() {
+            const weight = document.getElementById('weight').value;
+            const distance = document.getElementById('distance').value;
+            const urgent = document.getElementById('urgent').value;
+
+            if (!weight || !distance) { alert("Please fill in fields!"); return; }
+
+            fetch('/process_order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ weight: weight, distance: distance, urgent: urgent })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('table-body');
+                    const row = document.createElement('tr');
+
+                    // Fancy Badge Logic
+                    let typeBadge = '';
+                    if (data.type === 'air') typeBadge = '<span class="status-pill blue">✈️ Air</span>';
+                    else if (data.type === 'ship') typeBadge = '<span class="status-pill yellow">🚢 Ship</span>';
+                    else typeBadge = '<span class="status-pill green">🚚 Truck</span>';
+
+                    row.innerHTML = `
+                    <td class="id-cell">#${data.id}</td>
+                    <td><div class="detail-cell"><strong>${data.weight}kg</strong><span>${data.distance}km</span></div></td>
+                    <td>${typeBadge}</td>
+                    <td>${data.eta}</td>
+                `;
+
+                    row.style.animation = "slideIn 0.3s ease-out";
+                    tbody.prepend(row);
+                });
+        }
+    </script>
+</body>
+
+</html>
