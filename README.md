@@ -36,35 +36,6 @@ Key files:
 
 Implemented in [order_logic.cpp](order_logic.cpp) under `Config` and `TransportFactory::create_transport()`.
 
-## Build the C++ Library
-
-Place the built library next to [Factory.py](Factory.py).
-
-macOS:
-
-```bash
-cd /Volumes/General/Factory_Singleton
-g++ -std=c++17 -fPIC -shared order_logic.cpp -o logistics.dylib
-```
-
-Linux:
-
-```bash
-cd /Volumes/General/Factory_Singleton
-g++ -std=c++17 -fPIC -shared order_logic.cpp -o logistics.so
-```
-
-Note: Windows builds may require export decorations or a `.def` file; this repo targets macOS/Linux.
-
-## Run the Web App
-
-```bash
-cd /Volumes/General/Factory_Singleton
-python3 -m venv .venv
-source .venv/bin/activate
-pip install flask
-python Factory.py
-```
 
 
 ## API
@@ -145,30 +116,6 @@ This implementation embeds the transport selection and creation logic directly i
 
 - Business logic (processing orders)
 - Construction logic (selecting and creating transports)
-
-## Building and Running
-
-```bash
-# Compile
-g++ -std=c++17 Order.cpp -o order_system
-
-# Run
-./order_system
-```
-
-## Example Usage
-
-```cpp
-OrderManager manager;
-
-// Process various orders
-manager.process_order({1, 15.0, 600.0, true});   // Air (urgent + light + long)
-manager.process_order({2, 1200.0, 2500.0, false}); // Ship (heavy + very long)
-manager.process_order({3, 150.0, 300.0, false});  // Truck (default)
-
-// Display results
-manager.print_records();
-```
 
 ## Requirements
 
